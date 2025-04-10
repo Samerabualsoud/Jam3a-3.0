@@ -1,0 +1,52 @@
+# Digital Ocean App Platform Configuration
+
+This file contains the configuration for deploying the Jam3a-3.0 application to Digital Ocean App Platform.
+
+```json
+{
+  "name": "jam3a-3-0",
+  "services": [
+    {
+      "name": "web",
+      "github": {
+        "repo": "Samerabualsoud/Jam3a-3.0",
+        "branch": "main",
+        "deploy_on_push": true
+      },
+      "build_command": "npm run build",
+      "run_command": "npm start",
+      "envs": [
+        {
+          "key": "MONGODB_URI",
+          "value": "mongodb+srv://samer:2141991Sam@jam3a.yfuimdi.mongodb.net/?retryWrites=true&w=majority&appName=Jam3a",
+          "type": "SECRET"
+        },
+        {
+          "key": "NEXTAUTH_SECRET",
+          "value": "your-nextauth-secret-key-here",
+          "type": "SECRET"
+        },
+        {
+          "key": "NEXTAUTH_URL",
+          "value": "${APP_URL}",
+          "type": "GENERAL"
+        },
+        {
+          "key": "NEXT_PUBLIC_GA_ID",
+          "value": "G-G3N8DYCLBM",
+          "type": "GENERAL"
+        }
+      ],
+      "http_port": 3000,
+      "instance_count": 1,
+      "instance_size_slug": "basic-xs",
+      "routes": [
+        {
+          "path": "/"
+        }
+      ],
+      "source_dir": "/"
+    }
+  ]
+}
+```

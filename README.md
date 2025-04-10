@@ -1,36 +1,147 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Jam3a-3.0 Documentation
+
+## Overview
+
+Jam3a-3.0 is a modern e-commerce platform built with Next.js 14, TypeScript, and MongoDB. This application is a complete rebuild of the original Jam3a-2.0 codebase, featuring improved architecture, performance, and maintainability.
+
+## Tech Stack
+
+- **Frontend**: Next.js 14, TypeScript, TailwindCSS, Shadcn UI
+- **State Management**: Zustand
+- **Backend**: Next.js API Routes, Prisma ORM
+- **Database**: MongoDB
+- **Authentication**: NextAuth.js
+- **Analytics**: Google Analytics
+- **Deployment**: Digital Ocean App Platform, Docker
+
+## Features
+
+- User authentication and account management
+- Product browsing with filtering and sorting
+- Shopping cart functionality
+- Order management
+- Admin dashboard for product and order management
+- Google Analytics integration
+- Responsive design for mobile and desktop
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
+- Node.js 18 or later
+- npm 9 or later
+- MongoDB Atlas account
+
+### Local Development
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Samerabualsoud/Jam3a-3.0.git
+   cd Jam3a-3.0
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Set up environment variables:
+   Create a `.env` file in the root directory with the following variables:
+   ```
+   MONGODB_URI=mongodb+srv://samer:2141991Sam@jam3a.yfuimdi.mongodb.net/?retryWrites=true&w=majority&appName=Jam3a
+   NEXTAUTH_SECRET=your-nextauth-secret-key-here
+   NEXTAUTH_URL=http://localhost:3000
+   NEXT_PUBLIC_GA_ID=G-G3N8DYCLBM
+   ```
+
+4. Generate Prisma client:
+   ```bash
+   npx prisma generate
+   ```
+
+5. Seed the database:
+   ```bash
+   npm run db:seed
+   ```
+
+6. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+7. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+### Testing
+
+Run the local development test script to verify your environment:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+./test-local-dev.sh
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Project Structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+jam3a-3.0/
+├── .do/                  # Digital Ocean configuration
+├── prisma/               # Prisma schema and migrations
+├── public/               # Static assets
+├── src/
+│   ├── app/              # Next.js App Router pages
+│   │   ├── api/          # API routes
+│   │   └── ...           # Page routes
+│   ├── components/       # React components
+│   │   ├── analytics/    # Analytics components
+│   │   ├── forms/        # Form components
+│   │   ├── layout/       # Layout components
+│   │   └── ui/           # UI components
+│   ├── hooks/            # Custom React hooks
+│   ├── lib/              # Utility libraries
+│   │   └── db/           # Database utilities
+│   └── store/            # Zustand state stores
+├── .env                  # Environment variables
+├── Dockerfile            # Docker configuration
+├── DEPLOYMENT.md         # Deployment instructions
+└── package.json          # Project dependencies
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## API Endpoints
 
-## Learn More
+### Authentication
+- `POST /api/auth/register` - Register a new user
+- `GET/POST /api/auth/[...nextauth]` - NextAuth.js authentication
 
-To learn more about Next.js, take a look at the following resources:
+### Products
+- `GET /api/products` - Get all products
+- `POST /api/products` - Create a new product (admin only)
+- `GET /api/products/[id]` - Get a specific product
+- `PATCH /api/products/[id]` - Update a product (admin only)
+- `DELETE /api/products/[id]` - Delete a product (admin only)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Orders
+- `POST /api/orders` - Create a new order
+- `GET /api/orders/user` - Get current user's orders
+- `GET /api/orders/[id]` - Get a specific order
+- `PATCH /api/orders/[id]` - Update order status (admin only)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Analytics
+- `GET /api/analytics/config` - Get analytics configuration
+- `PATCH /api/analytics/config` - Update analytics configuration (admin only)
 
-## Deploy on Vercel
+### System
+- `GET /api/health` - System health check
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deployment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed deployment instructions.
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch: `git checkout -b feature/my-new-feature`
+3. Commit your changes: `git commit -am 'Add some feature'`
+4. Push to the branch: `git push origin feature/my-new-feature`
+5. Submit a pull request
+
+## License
+
+This project is licensed under the MIT License.
